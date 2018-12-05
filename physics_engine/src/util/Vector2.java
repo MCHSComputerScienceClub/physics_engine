@@ -12,13 +12,39 @@ public class Vector2 {
         this.y = y;
     }
 
-    public void add(Vector2 other) {
+    public Vector2 add(Vector2 other) {
         this.x += other.x;
         this.y += other.y;
+        return this;
     }
 
-    public void mult(float scalar) {
+    public Vector2 mult(float scalar) {
         this.x *= scalar;
         this.y *= scalar;
+        return this;
+    }
+
+    public Vector2 iMult(float scalar) {
+        return new Vector2(this.x * scalar, this.y * scalar);
+    }
+
+    public Vector2 div(float scalar) {
+        this.x /= scalar;
+        this.y /= scalar;
+        return this;
+    }
+
+    public Vector2 set(Vector2 other) {
+        this.x = other.x;
+        this.y = other.y;
+        return this;
+    }
+
+    public int getRoundedX() { return Math.round(x); }
+    public int getRoundedY() { return Math.round(y); }
+
+    @Override
+    public String toString() {
+        return String.format("<x: %.3f, y: %.3f>", x, y);
     }
 }

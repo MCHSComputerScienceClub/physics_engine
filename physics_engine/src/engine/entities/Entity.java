@@ -1,8 +1,10 @@
 package engine.entities;
 
 import engine.components.Component;
+import util.Vector2;
 
 public interface Entity {
     void addComponent(Component component);
-    Component getComponent(Component.ComponentType type);
+    float getScalarComponent(Component.ComponentType type);
+    Vector2 getVectorComponent(Component.ComponentType type);
 }

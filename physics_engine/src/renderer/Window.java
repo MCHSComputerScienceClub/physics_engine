@@ -1,5 +1,7 @@
 package renderer;
 
+import util.Constants;
+
 import javax.swing.*;
 
 public class Window {
@@ -15,5 +17,11 @@ public class Window {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        while (true) {
+            try {
+                Thread.sleep(1);
+            } catch (Exception e) {}
+            frame.repaint();
+        }
     }
 }

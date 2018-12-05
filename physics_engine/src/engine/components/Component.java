@@ -1,9 +1,15 @@
 package engine.components;
 
-public interface Component {
+public interface Component<T> {
     ComponentType getType();
 
     enum ComponentType {
-        POSITION_COMPONENT
+        POSITION,
+        VELOCITY,
+        ACCELERATION,
+        FORCE,
+        MASS
     }
+
+    T getValue();
 }

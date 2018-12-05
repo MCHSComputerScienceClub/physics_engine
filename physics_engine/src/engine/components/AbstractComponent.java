@@ -1,6 +1,6 @@
 package engine.components;
 
-public abstract class AbstractComponent implements Component {
+public abstract class AbstractComponent<T> implements Component<T> {
     private ComponentType type;
 
     public AbstractComponent(ComponentType type) {
@@ -10,5 +10,10 @@ public abstract class AbstractComponent implements Component {
     @Override
     public ComponentType getType() {
         return type;
+    }
+
+    @Override
+    public String toString() {
+        return type.toString();
     }
 }
