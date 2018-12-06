@@ -2,19 +2,23 @@ package engine;
 
 import engine.entities.Entity;
 import engine.systems.System;
+import renderer.Renderer;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class EntityManager {
-    List<Entity> entities;
-    Map<System.SystemType, System> systems;
+    private List<Entity> entities;
+    private Map<System.SystemType, System> systems;
+    private Renderer renderer;
 
     public EntityManager() {
         entities = new ArrayList<>();
         systems = new HashMap<>();
+        renderer = new Renderer();
     }
 
     public void update() {
@@ -32,5 +36,11 @@ public class EntityManager {
 
     public void addSystem(System s) {
         systems.put(s.getType(), s);
+    }
+
+    public void render(Graphics2D g2d, float alpha) {
+        for (Entity e : entities) {
+            renderer.render(e, g2d, alpha);
+        }
     }
 }

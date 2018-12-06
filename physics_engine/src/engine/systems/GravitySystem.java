@@ -2,6 +2,7 @@ package engine.systems;
 
 import engine.components.Component;
 import engine.entities.Entity;
+import util.Constants;
 import util.Vector2;
 
 public class GravitySystem extends AbstractSystem {
@@ -11,8 +12,18 @@ public class GravitySystem extends AbstractSystem {
 
     @Override
     public void act() {
-        for (Entity e : entities) {
-            e.getVectorComponent(Component.ComponentType.FORCE).add(new Vector2(0, 0.98f).mult(e.getScalarComponent(Component.ComponentType.MASS)));
+        for (int i = 0; i < entities.size() - 1; i++) {
+            for (int j = i + 1; j < entities.size(); j++) {
+                Entity e1 = entities.get(i);
+                Entity e2 = entities.get(j);
+
+                float distance = e1.getVectorComponent(Component.ComponentType.POSITION).distanceTo(e2.getVectorComponent(Component.ComponentType.POSITION));
+                float gravityStrength = Constants.GRAVITY_STRENGTH * e1.getScalarComponent(Component.ComponentType.MASS) * e2.getScalarComponent(Component.ComponentType.MASS) / (distance * distance);
+                Vector2 gravity = e2.getVectorComponent(Component.ComponentType.POSITION).iSub(e1.getVectorComponent(Component.ComponentType.POSITION)).normalize().mult(gravityStrength);
+                e1.getVectorComponent(Component.ComponentType.FORCE).add(gravity);
+                e2.getVectorComponent(Component.ComponentType.FORCE).add(gravity.mult(-1));
+                // java.lang.System.out.printf("P1: %s | V1: %s | P2: %s | V2: %s | GS: %.3f | G: %s%n", e1.getVectorComponent(Component.ComponentType.POSITION).toString(), e1.getVectorComponent(Component.ComponentType.VELOCITY).toString(), e2.getVectorComponent(Component.ComponentType.POSITION).toString(), e2.getVectorComponent(Component.ComponentType.VELOCITY).toString(), gravityStrength, gravity.toString());
+            }
         }
     }
 }

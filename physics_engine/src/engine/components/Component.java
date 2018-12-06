@@ -8,7 +8,10 @@ public interface Component<T> {
         VELOCITY,
         ACCELERATION,
         FORCE,
-        MASS
+        MASS,
+        PREV_POSITION,
+        RADIUS,
+        RESTITUTION
     }
 
     T getValue();

@@ -18,6 +18,16 @@ public class Vector2 {
         return this;
     }
 
+    public Vector2 sub(Vector2 other) {
+        this.x -= other.x;
+        this.y -= other.y;
+        return this;
+    }
+
+    public Vector2 iSub(Vector2 other) {
+        return new Vector2(this.x - other.x, this.y - other.y);
+    }
+
     public Vector2 mult(float scalar) {
         this.x *= scalar;
         this.y *= scalar;
@@ -34,10 +44,30 @@ public class Vector2 {
         return this;
     }
 
+    public float dotProduct(Vector2 other) {
+        return this.x * other.x + this.y * other.y;
+    }
+
+    public float magnitude() {
+        return (float) Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+    }
+
+    public Vector2 normalize() {
+        return this.div(this.magnitude());
+    }
+
+    public float distanceTo(Vector2 other) {
+        return (float) Math.sqrt(Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2));
+    }
+
     public Vector2 set(Vector2 other) {
         this.x = other.x;
         this.y = other.y;
         return this;
+    }
+
+    public Vector2 copy() {
+        return new Vector2(x, y);
     }
 
     public int getRoundedX() { return Math.round(x); }

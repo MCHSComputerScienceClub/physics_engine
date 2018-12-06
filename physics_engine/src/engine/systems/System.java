@@ -7,7 +7,8 @@ public interface System {
 
     enum SystemType {
         FORCE,
-        GRAVITY
+        GRAVITY,
+        COLLISION
     }
     void addEntity(Entity e);
     void act();
