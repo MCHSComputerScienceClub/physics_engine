@@ -4,7 +4,19 @@ import engine.components.Component;
 import engine.entities.Entity;
 import util.Vector2;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CollisionSystem extends AbstractSystem {
+    private static final List<Component.ComponentType> requiredComponentTypes = new ArrayList<>();
+    static {
+        requiredComponentTypes.add(Component.ComponentType.POSITION);
+        requiredComponentTypes.add(Component.ComponentType.VELOCITY);
+        requiredComponentTypes.add(Component.ComponentType.MASS);
+        requiredComponentTypes.add(Component.ComponentType.RADIUS);
+        requiredComponentTypes.add(Component.ComponentType.RESTITUTION);
+    }
+
     public CollisionSystem() {
         super(SystemType.COLLISION);
     }
@@ -45,5 +57,10 @@ public class CollisionSystem extends AbstractSystem {
         Vector2 correction = normal.mult(Math.max(penetration - slop, 0) / (1 / e1.getScalarComponent(Component.ComponentType.MASS) + 1 / e2.getScalarComponent(Component.ComponentType.MASS)) * percent);
         e1.getVectorComponent(Component.ComponentType.POSITION).sub(correction.iMult(1 / e1.getScalarComponent(Component.ComponentType.MASS)));
         e2.getVectorComponent(Component.ComponentType.POSITION).add(correction.mult(1 / e2.getScalarComponent(Component.ComponentType.MASS)));
+    }
+
+    @Override
+    protected List<Component.ComponentType> requiredComponentTypes() {
+        return requiredComponentTypes;
     }
 }

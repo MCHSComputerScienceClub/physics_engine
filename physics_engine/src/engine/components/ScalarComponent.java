@@ -1,7 +1,7 @@
 package engine.components;
 
 public class ScalarComponent extends AbstractComponent<Float> {
-    private float value;
+    private final float value;
 
     public ScalarComponent(float value, ComponentType type) {
         super(type);

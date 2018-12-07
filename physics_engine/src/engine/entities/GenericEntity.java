@@ -6,11 +6,12 @@ import engine.components.VectorComponent;
 import util.Vector2;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class GenericEntity implements Entity {
-    private Map<Component.ComponentType, ScalarComponent> scalarComponents;
-    private Map<Component.ComponentType, VectorComponent> vectorComponents;
+    private final Map<Component.ComponentType, ScalarComponent> scalarComponents;
+    private final Map<Component.ComponentType, VectorComponent> vectorComponents;
 
     public GenericEntity() {
         scalarComponents = new HashMap<>();
@@ -39,14 +40,30 @@ public class GenericEntity implements Entity {
     }
 
     @Override
+    public boolean hasComponents(List<Component.ComponentType> types) {
+        int count = 0;
+        for (Component.ComponentType t : scalarComponents.keySet()) {
+            if (types.contains(t)) {
+                count++;
+            }
+        }
+        for (Component.ComponentType t : vectorComponents.keySet()) {
+            if (types.contains(t)) {
+                count++;
+            }
+        }
+        return count == types.size();
+    }
+
+    @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
         for (ScalarComponent c : scalarComponents.values()) {
-            res.append(String.format("%s%n", c.toString()));
+            res.append(String.format("%s | ", c.toString()));
         }
         for (VectorComponent c : vectorComponents.values()) {
-            res.append(String.format("%s%n", c.toString()));
+            res.append(String.format("%s | ", c.toString()));
         }
-        return res.toString();
+        return res.subSequence(0, res.length() - " | ".length()).toString();
     }
 }

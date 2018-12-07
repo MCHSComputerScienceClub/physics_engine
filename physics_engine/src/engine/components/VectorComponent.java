@@ -3,7 +3,7 @@ package engine.components;
 import util.Vector2;
 
 public class VectorComponent extends AbstractComponent<Vector2> {
-    private Vector2 value;
+    private final Vector2 value;
 
     public VectorComponent(Vector2 value, ComponentType type) {
         super(type);

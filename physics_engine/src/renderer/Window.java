@@ -12,10 +12,10 @@ import util.Vector2;
 import javax.swing.*;
 
 public class Window {
-    private JFrame frame;
+    private final JFrame frame;
 
-    private EntityManager manager;
-    private EntityFactory entityFactory;
+    private final EntityManager manager;
+    private final EntityFactory entityFactory;
 
     public Window(String title) {
         frame = new JFrame(title);

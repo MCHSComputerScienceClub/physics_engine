@@ -1,7 +1,7 @@
 package engine.components;
 
 public abstract class AbstractComponent<T> implements Component<T> {
-    private ComponentType type;
+    private final ComponentType type;
 
     public AbstractComponent(ComponentType type) {
         this.type = type;

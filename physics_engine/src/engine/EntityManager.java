@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 public class EntityManager {
-    private List<Entity> entities;
-    private Map<System.SystemType, System> systems;
-    private Renderer renderer;
+    private final List<Entity> entities;
+    private final Map<System.SystemType, System> systems;
+    private final Renderer renderer;
 
     public EntityManager() {
         entities = new ArrayList<>();

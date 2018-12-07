@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 class Canvas extends JPanel {
-    private EntityManager manager;
+    private final EntityManager manager;
     private float alpha;
     private int count;
 

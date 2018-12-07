@@ -5,7 +5,17 @@ import engine.entities.Entity;
 import util.Constants;
 import util.Vector2;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GravitySystem extends AbstractSystem {
+    private static final List<Component.ComponentType> requiredComponentTypes = new ArrayList<>();
+    static {
+        requiredComponentTypes.add(Component.ComponentType.POSITION);
+        requiredComponentTypes.add(Component.ComponentType.FORCE);
+        requiredComponentTypes.add(Component.ComponentType.MASS);
+    }
+
     public GravitySystem() {
         super(SystemType.GRAVITY);
     }
@@ -25,5 +35,10 @@ public class GravitySystem extends AbstractSystem {
                 // java.lang.System.out.printf("P1: %s | V1: %s | P2: %s | V2: %s | GS: %.3f | G: %s%n", e1.getVectorComponent(Component.ComponentType.POSITION).toString(), e1.getVectorComponent(Component.ComponentType.VELOCITY).toString(), e2.getVectorComponent(Component.ComponentType.POSITION).toString(), e2.getVectorComponent(Component.ComponentType.VELOCITY).toString(), gravityStrength, gravity.toString());
             }
         }
+    }
+
+    @Override
+    protected List<Component.ComponentType> requiredComponentTypes() {
+        return requiredComponentTypes;
     }
 }
